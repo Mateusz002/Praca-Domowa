@@ -120,6 +120,19 @@ def komunikaty(wydarzenie, tekst = {}):
         print("Trafiony!!")
     elif wydarzenie == "zniszczony":
         print("Trafiony, zatopiony!!")
+        
+def komunikatyfr(wydarzenie, tekst = {}):
+    if wydarzenie == "koniecGry":
+        print("%s Tu as gagné!!!" % tekst["gracz"])
+    elif wydarzenie == "nowaRunda":
+        print("Votre tour %s" % tekst["gracz"])
+        
+    if wydarzenie == "pudlo":
+        print("Boîte!!")
+    elif wydarzenie == "trafiony":
+        print("Frapper!!")
+    elif wydarzenie == "zniszczony":
+        print("Frapper et couler!!")
 
 def ruchAI(koordynaty):
     x = random.randint(0, koordynaty.szerokosc - 1)
