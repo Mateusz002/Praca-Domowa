@@ -120,6 +120,22 @@ def komunikaty(wydarzenie, tekst = {}):
         print("Trafiony!!")
     elif wydarzenie == "zniszczony":
         print("Trafiony, zatopiony!!")
+    
+    if wydarzenie == "poczatek":
+        print("%s Gdzie chcesz strzelic?" % tekst["gracz"])
+        
+def komunikatyEng(wydarzenie, tekst = {}):
+    if wydarzenie == "koniecGry":
+        print("%s You Win!!" % tekst["gracz"])
+    elif wydarzenie == "nowaRunda":
+        print("Your Turn %s" % tekst["gracz"])
+        
+    if wydarzenie == "pudlo":
+        print("Miss!!")
+    elif wydarzenie == "trafiony":
+        print("Hit!!")
+    elif wydarzenie == "zniszczony":
+        print("Hit and Sunken!!")
 
 def ruchAI(koordynaty):
     x = random.randint(0, koordynaty.szerokosc - 1)
@@ -128,7 +144,7 @@ def ruchAI(koordynaty):
 
 def ruchCzlowiek(koordynaty):
     while True:
-        inp = input("gdzie chcesz strzelic?\n")
+        inp = input(komunikaty("poczatek", {"gracz": ruchCzlowiek.imie}))
         xstr, ystr = inp.split(",") 
         if int(xstr) <= koordynaty.szerokosc and int(ystr) <= koordynaty.wysokosc:
             break
@@ -167,20 +183,20 @@ if __name__ == "__main__":
         broniacyMapa = mapy[broniacy]
         ruchCzlowiek = gracze[atakujacy]
         
-        komunikaty("nowaRunda", {"gracz": ruchCzlowiek.imie})
+        komunikatyEng("nowaRunda", {"gracz": ruchCzlowiek.imie})
         koordynaty = ruchCzlowiek.wystrzal(broniacyMapa)
         trafionySt = broniacyMapa.strzal(koordynaty)
         if trafionySt is None:
-            komunikaty("pudlo", {"gracz": ruchCzlowiek.imie})
+            komunikatyEng("pudlo", {"gracz": ruchCzlowiek.imie})
         else:
             if trafionySt.zniszczony():
-                komunikaty("zniszczony", {"gracz": ruchCzlowiek.imie})
+                komunikatyEng("zniszczony", {"gracz": ruchCzlowiek.imie})
             else:
-                komunikaty("trafiony", {"gracz": ruchCzlowiek.imie})
+                komunikatyEng("trafiony", {"gracz": ruchCzlowiek.imie})
         plansza(broniacyMapa)
         
         if broniacyMapa.wygrana():
-            komunikaty("koniecGry", {"gracz": ruchCzlowiek.imie})
+            komunikatyEng("koniecGry", {"gracz": ruchCzlowiek.imie})
             break
         atakujacy = broniacy
     
